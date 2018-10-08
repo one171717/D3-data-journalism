@@ -6,7 +6,7 @@ var margin = { top: 20, right: 40, bottom: 60, left: 100 };
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
-// Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
+// Create an SVG wrapper
 var svg = d3.select(".chart")
   .append("svg")
   .attr("width", svgWidth)
@@ -16,7 +16,7 @@ var svg = d3.select(".chart")
 
 var chart = svg.append("g");
 
-// Append a div to the body to create tooltips, assign it a class
+// Append a div to the body
 d3.select(".chart")
   .append("div")
   .attr("class", "tooltip")
@@ -26,8 +26,6 @@ d3.csv("data/data.csv", function(err, Data) {
   if (err) throw err;
 
   Data.forEach(function(data) {
-    // data.hair_length = +data.hair_length;
-    // data.num_hits = +data.num_hits;
     data.poverty = +data.poverty;
     data.healthcare = +data.healthcare;
   });
@@ -77,12 +75,10 @@ d3.csv("data/data.csv", function(err, Data) {
         .on("click", function(data) {
         toolTip.show(data);
         })
-        // onmouseout event
         .on("mouseout", function(data, index) {
         toolTip.hide(data);
         });
       elemEnter.append("text")
-        //.attr("dx", function(data, index){return -12;})
         .attr("dy", function(data, index){return 5;})
         .attr("text-anchor", "middle")
         .text(function(data, index){return data.abbr;})     
